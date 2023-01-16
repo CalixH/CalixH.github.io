@@ -36,7 +36,7 @@ scene.add( ambientLight);
 // const controls = new OrbitControls(camera, renderer.domElement);
 
 function addStar() {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const geometry = new THREE.TorusGeometry(0.6, 0.4, 16, 100);
   const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
   const star = new THREE.Mesh(geometry, material);
 
@@ -52,17 +52,15 @@ Array(200).fill().forEach(addStar);
 
 // Background
 
-
-
 const spaceTexture = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceTexture;
 
 // Avatar
 
-// const geometry2 = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
-// const torusKnot = new THREE.Mesh( geometry2, material );
+const geometry2 = new THREE.TorusKnotGeometry( 1, 0.4, 100, 16,2 ,3 );
+const torusKnot = new THREE.Mesh( geometry2, material );
 
-//scene.add(torusKnot);
+scene.add(torusKnot);
 
 // orange
 
@@ -80,8 +78,6 @@ scene.add(orange);
 orange.position.z = 30;
 orange.position.setX(-10);
 
-cax.position.z = -5;
-cax.position.x = 2;
 
 
 
@@ -93,8 +89,6 @@ function moveCamera() {
   orange.rotation.y += 0.075;
   orange.rotation.z += 0.05;
 
-  cax.rotation.y += 0.01;
-  cax.rotation.z += 0.01;
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
