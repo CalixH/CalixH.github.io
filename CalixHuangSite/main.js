@@ -2,6 +2,7 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+
 // Setup
 
 const scene = new THREE.Scene();
@@ -19,7 +20,6 @@ camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
-
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
@@ -30,17 +30,8 @@ scene.add(torus);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5, 5, 5);
-
 const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add(pointLight, ambientLight);
-
-// Helpers
-
-// const lightHelper = new THREE.PointLightHelper(pointLight)
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper)
+scene.add( ambientLight);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -61,27 +52,26 @@ Array(200).fill().forEach(addStar);
 
 // Background
 
+
+
 const spaceTexture = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceTexture;
 
 // Avatar
 
-const caxTexture = new THREE.TextureLoader().load('calixHuang.JPG');
+// const geometry2 = new THREE.TorusKnotGeometry( 10, 3, 100, 16 );
+// const torusKnot = new THREE.Mesh( geometry2, material );
 
-const cax = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: caxTexture }));
-
-scene.add(cax);
+//scene.add(torusKnot);
 
 // orange
 
 const orangeTexture = new THREE.TextureLoader().load('orange.jpg');
-const normalTexture = new THREE.TextureLoader().load('normal.jpg');
 
 const orange = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
   new THREE.MeshStandardMaterial({
-    map: orangeTexture,
-    normalMap: normalTexture,
+    map: orangeTexture
   })
 );
 
@@ -92,6 +82,8 @@ orange.position.setX(-10);
 
 cax.position.z = -5;
 cax.position.x = 2;
+
+
 
 // Scroll Animation
 
