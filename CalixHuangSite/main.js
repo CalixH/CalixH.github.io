@@ -23,7 +23,11 @@ renderer.render(scene, camera);
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
+const material = new THREE.MeshPhysicalMaterial({});
+material.color = 0xff6347;
+material.metalness = 1;
+material.roughness = 0.1;
+material.emissive = 0xffffff;
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
@@ -32,12 +36,16 @@ scene.add(torus);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add( ambientLight);
+scene.fog = new THREE.Fog(0xababab, 10, 100);
+
+const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+scene.add( light );
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
 function addStar() {
-  const geometry = new THREE.TorusGeometry(0.6, 0.4, 16, 100);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+  const geometry = new THREE.TorusGeometry(0.4, 0.3, 16, 100);
+  const material = new THREE.MeshStandardMaterial({ color: 0x949494 });
   const star = new THREE.Mesh(geometry, material);
 
   const [x, y, z] = Array(3)
@@ -45,6 +53,9 @@ function addStar() {
     .map(() => THREE.MathUtils.randFloatSpread(100));
 
   star.position.set(x, y, z);
+  star.rotateX(x);
+  star.rotateY(y);
+  star.rotateZ(z);
   scene.add(star);
 }
 
@@ -57,8 +68,9 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const geometry2 = new THREE.TorusKnotGeometry( 1, 0.4, 100, 16,2 ,3 );
+const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.5, 100, 16,4 ,3 );
 const torusKnot = new THREE.Mesh( geometry2, material );
+torusKnot.rotateX(-0.7);
 
 scene.add(torusKnot);
 
@@ -78,7 +90,8 @@ scene.add(orange);
 orange.position.z = 30;
 orange.position.setX(-10);
 
-
+torusKnot.position.z = -5;
+torusKnot.position.x = 2;
 
 
 // Scroll Animation
@@ -93,6 +106,7 @@ function moveCamera() {
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
+  camera.rotation.z = t * -0.0002;
 }
 
 document.body.onscroll = moveCamera;
