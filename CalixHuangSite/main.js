@@ -1,6 +1,8 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
+			import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 
 
 // Setup
@@ -23,23 +25,45 @@ renderer.render(scene, camera);
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshPhysicalMaterial({});
-material.color = 0xff6347;
-material.metalness = 1;
-material.roughness = 0.1;
-material.emissive = 0xffffff;
+const material = new THREE.MeshStandardMaterial({color: 0x909090, roughness: 0, metalness: 0.7});
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
 
 // Lights
 
-const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add( ambientLight);
-scene.fog = new THREE.Fog(0xababab, 10, 100);
 
-const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+
+const light = new THREE.HemisphereLight( 0xfffff, 0x000000 );
 scene.add( light );
+
+const amb = new THREE.AmbientLight(0xffffff);
+scene.add(amb);
+
+// const pointLight = new THREE.PointLight(0xffffff);
+// pointLight.position.set(5, 5, 5);
+// scene.add(pointLight);
+
+// const lightHelper = new THREE.PointLightHelper(pointLight);
+// scene.add(lightHelper);
+
+RectAreaLightUniformsLib.init();
+
+				const rectLight1 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
+				rectLight1.position.set( - 5, 5, 5 );
+				scene.add( rectLight1 );
+
+				const rectLight2 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
+				rectLight2.position.set( 0, 5, 5 );
+				scene.add( rectLight2 );
+
+				const rectLight3 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
+				rectLight3.position.set( 5, 5, 5 );
+				scene.add( rectLight3 );
+
+				scene.add( new RectAreaLightHelper( rectLight1 ) );
+				scene.add( new RectAreaLightHelper( rectLight2 ) );
+				scene.add( new RectAreaLightHelper( rectLight3 ) );
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -68,7 +92,7 @@ scene.background = spaceTexture;
 
 // Avatar
 
-const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.5, 100, 16,4 ,3 );
+const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.6, 100, 16,4 ,3 );
 const torusKnot = new THREE.Mesh( geometry2, material );
 torusKnot.rotateX(-0.7);
 
@@ -106,7 +130,7 @@ function moveCamera() {
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
-  camera.rotation.z = t * -0.0002;
+  camera.rotation.z = t * 0.0002;
 }
 
 document.body.onscroll = moveCamera;
@@ -123,6 +147,7 @@ function animate() {
 
   orange.rotation.x += 0.005;
 
+  torusKnot.rotation.z += 0.01;
   // controls.update();
 
   renderer.render(scene, camera);
