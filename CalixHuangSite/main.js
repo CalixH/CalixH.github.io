@@ -1,8 +1,9 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { RectAreaLightHelper } from 'three/addons/helpers/RectAreaLightHelper.js';
-			import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import {TTFLoader} from 'three/examples/jsm/loaders/TTFLoader';
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
 
 
 // Setup
@@ -24,75 +25,86 @@ renderer.render(scene, camera);
 
 // Torus
 
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial({color: 0x909090, roughness: 0, metalness: 0.7});
+const geometry = new THREE.TorusGeometry(10, 3, 16, 100, 4.7);
+const material = new THREE.MeshNormalMaterial({color: 0xff0000, wireframe: true, });
 const torus = new THREE.Mesh(geometry, material);
 
 scene.add(torus);
 
 // Lights
 
-
-
-const light = new THREE.HemisphereLight( 0xfffff, 0x000000 );
-scene.add( light );
-
-const amb = new THREE.AmbientLight(0xffffff);
+const amb = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(amb);
 
-// const pointLight = new THREE.PointLight(0xffffff);
-// pointLight.position.set(5, 5, 5);
-// scene.add(pointLight);
+const pLight = new THREE.PointLight(0xffffff, 0.5);
+scene.add(pLight);
 
-// const lightHelper = new THREE.PointLightHelper(pointLight);
-// scene.add(lightHelper);
-
-RectAreaLightUniformsLib.init();
-
-				const rectLight1 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
-				rectLight1.position.set( - 5, 5, 5 );
-				scene.add( rectLight1 );
-
-				const rectLight2 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
-				rectLight2.position.set( 0, 5, 5 );
-				scene.add( rectLight2 );
-
-				const rectLight3 = new THREE.RectAreaLight( 0xffffff, 5, 4, 10 );
-				rectLight3.position.set( 5, 5, 5 );
-				scene.add( rectLight3 );
-
-				scene.add( new RectAreaLightHelper( rectLight1 ) );
-				scene.add( new RectAreaLightHelper( rectLight2 ) );
-				scene.add( new RectAreaLightHelper( rectLight3 ) );
+const planeG = new THREE.PlaneGeometry(10000, 10000, 1000, 1000);
+const plane = new THREE.Mesh(planeG, material);
+plane.rotation.y = -100;
+plane.rotation.z = -100;
+scene.add(plane);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
 
+// Text
+const loader = new FontLoader();
+
+loader.load('./fonts/TR2N_Regular.json', function (font) {
+  const geometry = new TextGeometry('Calix \n Huang', {
+    font: font, size: 0.4, height: 0.1,
+  })
+  const textmesh = new THREE.Mesh(geometry, 
+    new THREE.MeshNormalMaterial({color: 0xad4000}));
+
+  scene.add(textmesh);
+  textmesh.position.x = -1.4;
+  textmesh.position.z = -1.5;
+  textmesh.position.y = 0.2;
+})
+
+
 function addStar() {
-  const geometry = new THREE.TorusGeometry(0.4, 0.3, 16, 100);
-  const material = new THREE.MeshStandardMaterial({ color: 0x949494 });
-  const star = new THREE.Mesh(geometry, material);
+  const a = THREE.MathUtils.randFloat(3, 11);
+
+  const geometry = new THREE.BoxGeometry(a, a, a);
+  const edges = new THREE.EdgesGeometry(geometry);
+  const star = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color: 0xffffff}));
 
   const [x, y, z] = Array(3)
     .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(100));
+    .map(() => THREE.MathUtils.randFloatSpread(800));
 
   star.position.set(x, y, z);
   star.rotateX(x);
   star.rotateY(y);
   star.rotateZ(z);
   scene.add(star);
+
+  // circle
+  const b = THREE.MathUtils.randFloat(1, 4);
+  const c = THREE.MathUtils.randFloat(2, 6.28);
+  const sphere = new THREE.SphereGeometry(b, 26, 14, 0, 6.28, c, 3.14);
+  const circle = new THREE.Mesh(sphere, material);
+
+  const [d, e, f] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(800));
+
+  circle.position.set(d,e,f);
+  scene.add(circle);
+
 }
 
-Array(200).fill().forEach(addStar);
+Array(350).fill().forEach(addStar);
 
 // Background
 
-const spaceTexture = new THREE.TextureLoader().load('space.jpg');
-scene.background = spaceTexture;
+scene.background = new THREE.Color(0x000000);
 
 // Avatar
 
-const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.6, 100, 16,4 ,3 );
+const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.6, 100, 16,1 ,3 );
 const torusKnot = new THREE.Mesh( geometry2, material );
 torusKnot.rotateX(-0.7);
 
@@ -129,7 +141,7 @@ function moveCamera() {
 
   camera.position.z = t * -0.01;
   camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0002;
+  camera.rotation.y = t * 0.0002;
   camera.rotation.z = t * 0.0002;
 }
 
