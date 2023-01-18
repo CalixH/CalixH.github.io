@@ -92,6 +92,9 @@ function addStar() {
     .map(() => THREE.MathUtils.randFloatSpread(800));
 
   circle.position.set(d,e,f);
+  circle.rotateX(x);
+  circle.rotateY(y);
+  circle.rotateZ(z);
   scene.add(circle);
 
 }
@@ -103,6 +106,15 @@ Array(350).fill().forEach(addStar);
 scene.background = new THREE.Color(0x000000);
 
 // Avatar
+
+const caxTexture = new THREE.TextureLoader().load('CalixHuang.JPG');
+const cax = new THREE.Mesh(new THREE.PlaneGeometry(5,5), new THREE.MeshBasicMaterial({map: caxTexture}));
+cax.rotateZ(-0.2);
+cax.rotateY(-0.3);
+cax.position.x = 3;
+cax.position.z = 5;
+cax.position.y = -0.3;
+scene.add(cax);
 
 const geometry2 = new THREE.TorusKnotGeometry( 1.6, 0.6, 100, 16,1 ,3 );
 const torusKnot = new THREE.Mesh( geometry2, material );
