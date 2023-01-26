@@ -1,10 +1,10 @@
 import './style.css';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
-import {TTFLoader} from 'three/examples/jsm/loaders/TTFLoader';
-import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
-import { RGBAFormat } from 'three';
+import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls';
+import { FontLoader } from '../node_modules/three/examples/jsm/loaders/FontLoader';
+import {TTFLoader} from '../node_modules/three/examples/jsm/loaders/TTFLoader';
+import {TextGeometry} from '../node_modules/three/examples/jsm/geometries/TextGeometry';
+import { RGBAFormat } from '../node_modules/three';
 
 
 // Setup
