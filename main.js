@@ -1,14 +1,14 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import {TTFLoader} from 'three/examples/jsm/loaders/TTFLoader';
-import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js';
 import { RGBAFormat } from 'three';
 
 
 // Setup
-var t = 0; 
+var t = 0;
 
 const scene = new THREE.Scene();
 
