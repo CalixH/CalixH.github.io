@@ -51,7 +51,7 @@ const plane2 = new THREE.Mesh(planeG, material);
 plane2.rotation.y = -110;
 plane2.rotation.z = -100;
 plane2.position.x = 700;
-plane2.position.z = 200;
+plane2.position.z = 300;
 scene.add(plane2);
 
 // const controls = new OrbitControls(camera, renderer.domElement);
