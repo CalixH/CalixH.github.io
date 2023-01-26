@@ -8,7 +8,7 @@ import { RGBAFormat } from '../node_modules/three';
 
 
 // Setup
-var t = 0;
+var t = 0; 
 
 const scene = new THREE.Scene();
 
