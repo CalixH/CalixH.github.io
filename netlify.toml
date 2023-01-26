@@ -1,2 +1,3 @@
 [build]
-  base = "CalixHuangSite/"
+publish = "dist/"
+command = "npm run build"
