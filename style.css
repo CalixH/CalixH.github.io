@@ -70,3 +70,8 @@ blockquote p {
 .left {
   grid-column: 6/12;
 }/*# sourceMappingURL=style.css.map */
+
+@font-face {
+  font-family: "TR2N_Regular";
+  src: url("TR2N_Regular.json");
+}
