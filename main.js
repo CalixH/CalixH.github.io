@@ -59,7 +59,7 @@ scene.add(plane2);
 // Text
 const loader = new FontLoader();
 
-loader.load('/assets/TR2N_Regular.json', function (font) {
+loader.load('/assets/TR2N_Regular-f3328d7d.json', function (font) {
   const geometry = new TextGeometry('Calix \n Huang', {
     font: font, size: 0.4, height: 0.1,
   })
