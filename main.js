@@ -82,7 +82,7 @@ function addStar() {
 
   const [x, y, z] = Array(3)
     .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(800));
+    .map(() => THREE.MathUtils.randFloatSpread(900));
 
   star.position.set(x, y, z);
   star.rotateX(x);
@@ -108,7 +108,7 @@ function addStar() {
 
 }
 
-Array(350).fill().forEach(addStar);
+Array(320).fill().forEach(addStar);
 
 // Background
 
@@ -138,6 +138,26 @@ const torusKnot = new THREE.Mesh( geometry2, material );
 torusKnot.rotateX(-0.7);
 
 scene.add(torusKnot);
+
+const geometry3 = new THREE.TorusKnotGeometry( 25, 5, 100, 16, 3,2 );
+const torusKnot3 = new THREE.Mesh( geometry3, material );
+scene.add(torusKnot3);
+torusKnot3.position.x = 80;
+torusKnot3.position.z = 0;
+torusKnot3.position.y = 45;
+torusKnot3.rotation.y = -0.9;
+torusKnot3.rotation.x = -0.5;
+
+const geometry4 = new THREE.TorusKnotGeometry( 20, 3, 100, 16,3 ,1 );
+const torusKnot4 = new THREE.Mesh( geometry4, material );
+scene.add(torusKnot4);
+torusKnot4.position.x = 160;
+torusKnot4.position.z = 150;
+torusKnot4.position.y = -80;
+torusKnot4.rotation.y = -1.1;
+
+const axesHelper = new THREE.AxesHelper( 500 );
+scene.add( axesHelper );
 
 // video
 let video = document.getElementById("video");
@@ -193,6 +213,16 @@ function moveCamera() {
   } else {
     camera.rotation.z = -0.8 - (t + 9000) * 0.0002
   }
+  torusKnot3.position.x = t * -0.01 + 60;
+  torusKnot3.position.y = t * -0.05 - 255;
+  torusKnot3.position.z = t * -0.2 - 1400;
+  torusKnot3.rotation.x += 0.01;
+  torusKnot3.rotation.y += 0.005;
+  torusKnot3.rotation.z += 0.01;
+
+  torusKnot4.position.x = t * -0.001 + 90;
+  torusKnot4.position.y = t * -0.07 - 710;
+  torusKnot4.position.z = t * -0.2 - 1650;
   //document.getElementById("demo").innerHTML = camera.rotation.z;
 }
 
@@ -213,6 +243,11 @@ function animate() {
   uw.rotation.y += 0.009;
 
   torusKnot.rotation.z += 0.01;
+  torusKnot3.rotation.z += 0.01;
+  torusKnot3.rotation.y += 0.014;
+
+  torusKnot4.rotation.z += 0.01;
+  torusKnot4.rotation.x += 0.014;
   // controls.update();
   videoTexture.needsUpdate = true;
 
