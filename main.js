@@ -156,8 +156,8 @@ torusKnot4.position.z = 150;
 torusKnot4.position.y = -80;
 torusKnot4.rotation.y = -1.1;
 
-const axesHelper = new THREE.AxesHelper( 500 );
-scene.add( axesHelper );
+// const axesHelper = new THREE.AxesHelper( 500 );
+// scene.add( axesHelper );
 
 // video
 let video = document.getElementById("video");
