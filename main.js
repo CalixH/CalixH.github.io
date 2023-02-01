@@ -8,7 +8,7 @@ import { RGBAFormat } from 'three';
 
 import pdfURL from "/CalixHuangResumeO1.pdf?url";
 
-document.querySelector(".button").href = pdfURL;
+document.querySelector("#resume").href = pdfURL;
 
 // Setup
 var t = 0;
