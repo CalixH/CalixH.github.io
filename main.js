@@ -6,7 +6,7 @@ import {TTFLoader} from 'three/examples/jsm/loaders/TTFLoader';
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js';
 import { RGBAFormat } from 'three';
 
-import pdfURL from "/CalixHuangResumeP.pdf?url";
+import pdfURL from "/Portfolio1.pdf?url";
 
 document.querySelector("#resume").href = pdfURL;
 
