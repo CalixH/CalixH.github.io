@@ -119,7 +119,7 @@ scene.background = new THREE.Color(0x000000);
 
 // Avatar
 
-const caxTexture = new THREE.TextureLoader().load('CalixHuang.JPG');
+const caxTexture = new THREE.TextureLoader().load('/assets/CalixHuang-eb3701c6.JPG');
 const cax = new THREE.Mesh(new THREE.PlaneGeometry(3.75,5), new THREE.MeshBasicMaterial({map: caxTexture}));
 cax.rotateZ(-0.2);
 cax.rotateY(-0.3);
@@ -129,7 +129,7 @@ cax.position.y = -0.3;
 scene.add(cax);
 
 // Uni
-const uwTexture = new THREE.TextureLoader().load('uw.png');
+const uwTexture = new THREE.TextureLoader().load('/assets/uw-77d77a41.png');
 const uw = new THREE.Mesh(new THREE.CircleGeometry(5.4), new THREE.MeshBasicMaterial({map: uwTexture, side: THREE.DoubleSide}));
 uw.position.x = 14;
 uw.position.z = 16;
